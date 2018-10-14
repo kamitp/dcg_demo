@@ -1,0 +1,25 @@
+version: '3'
+services:
+  hfmongo:
+    volumes:
+      - ~/hfdata:/data/db
+      - ~/mongo-entrypoint:/docker-entrypoint-initdb.d
+    image: mongo
+    container_name: hfmongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=recipes_service
+  loginservice:
+    build: ./LoginService
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "hfmongo"
+  recipeservice:
+    build: ./RecipeService
+    ports:
+      - "8081:8080"
+    depends_on:
+      - "hfmongo"
