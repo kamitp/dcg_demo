@@ -17,7 +17,7 @@ func CreateResponse(status string, msg interface{}) string {
 func CreateJWT(userName string, secrete string) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := make(jwt.MapClaims)
-	claims["iss"] = "Hello Fresh"                         // issuer
+	claims["iss"] = "DCG"                                 // issuer
 	claims["sub"] = "Test Assignmnet"                     // subject
 	claims["user"] = userName                             // user name
 	claims["admin"] = false                               // admin role
